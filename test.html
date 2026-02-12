@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Material Pricelist Guide</title>
+    <style>
+        /* CSS remains identical to your original to preserve branding and layout */
+        :root {
+            --ceo-blue: #1a3a6d;
+            --ceo-red: #b31919;
+            --ceo-gold: #d4af37;
+            --bg-gray: #f2f4f7;
+        }
+
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--bg-gray); 
+            margin: 0; 
+            padding: 10px; 
+            color: #333;
+            background-image: url("Logo.png");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: 35%;
+            background-blend-mode: overlay;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(242, 244, 247, 0.96);
+            z-index: -1;
+        }
+
+        .container { 
+            max-width: 1200px; 
+            margin: auto; 
+            background: rgba(255, 255, 255, 0.98); 
+            border-radius: 12px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+            overflow: hidden;
+            border-top: 8px solid var(--ceo-blue);
+        }
+        
+        .header { 
+            padding: 30px 20px; 
+            background: #fff;
+            border-bottom: 2px solid var(--ceo-gold);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .header-logo { height: 80px; width: auto; }
+
+        .org-text-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 15px; }
+        .org-title-main { color: #444; margin: 0; font-size: 18px; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; }
+        .org-title-sub { color: #666; margin: 0; font-size: 15px; text-transform: uppercase; font-weight: 600; }
+        .city-title { color: var(--ceo-red); margin: 0; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; }
+
+        .main-title { color: var(--ceo-blue); margin: 10px 0 0 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; font-weight: 900; line-height: 1.1; }
+
+        .controls-wrapper { padding: 20px; background: #fcfcfc; border-bottom: 1px solid #eee; }
+        .tools-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        
+        @media (min-width: 800px) {
+            .tools-grid { grid-template-columns: 1.5fr 1fr 0.6fr; } /* Adjusted for removed upload button */
+            .header-logo { height: 100px; }
+            .main-title { font-size: 34px; }
+        }
+
+        .control-group { display: flex; flex-direction: column; text-align: left;}
+        label { margin-bottom: 8px; font-size: 11px; font-weight: 800; color: var(--ceo-blue); text-transform: uppercase; }
+        select, input { padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; outline: none; background: white; }
+
+        .print-btn { background-color: var(--ceo-blue); color: white; border: none; padding: 12px; border-radius: 4px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; margin-top: auto; }
+
+        .update-stamp { text-align: right; padding: 10px 20px; font-size: 12px; color: var(--ceo-red); font-weight: 900; text-transform: uppercase; background: #fff; border-bottom: 1px solid #f0f0f0; }
+
+        .table-responsive { width: 100%; overflow-x: auto; max-height: 70vh; overflow-y: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 900px; }
+
+        thead th { background: var(--ceo-blue); text-align: left; padding: 15px; font-size: 11px; text-transform: uppercase; color: white; position: sticky; top: 0; z-index: 10; }
+        td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 13px; color: #444; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        
+        .price-cell { font-weight: 700; color: var(--ceo-red); font-family: 'Courier New', Courier, monospace; font-size: 15px; }
+        .cat-tag { font-size: 10px; font-weight: 800; background: #eef2f7; color: var(--ceo-blue); padding: 4px 8px; border-radius: 4px; border: 1px solid #d1d9e6; display: inline-block; }
+        .type-text { color: #888; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+
+        .footer-content { background-color: #fff; padding: 30px 20px; border-top: 1px solid #eee; }
+        .disclaimer-box { color: #666; font-size: 12px; text-align: center; margin-bottom: 25px; line-height: 1.1; }
+        .disclaimer-title { color: var(--ceo-red); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; display: block; font-size: 14px; }
+
+        .signature-block { text-align: center; color: #333; line-height: 1.2; margin-bottom: 25px; }
+        .signatory-name { font-weight: 800; font-size: 16px; text-transform: uppercase; display: block; border-bottom: 2px solid #333; width: fit-content; margin: 0 auto; padding: 0 5px; }
+
+        @media print {
+            .table-responsive { overflow: visible; max-height: none; }
+            .print-btn { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="logo-row">
+            <img src="Logo.png" alt="Logo 1" class="header-logo">
+            <img src="Logo1.png" alt="Logo 2" class="header-logo">
+        </div>
+        <div class="org-text-group">
+            <div class="org-title-main">City Engineer's Office</div>
+            <div class="org-title-sub">Planning and Design Division</div>
+            <div class="city-title">Bacolod City</div>
+        </div>
+        <h1 class="main-title">CONSTRUCTION MATERIAL PRICELIST GUIDE</h1>
+    </div>
+
+    <div class="controls-wrapper">
+        <div class="tools-grid">
+            <div class="control-group">
+                <label>Search Material</label>
+                <input type="text" id="searchFilter" placeholder="Search description or type..." onkeyup="renderTable()">
+            </div>
+            <div class="control-group">
+                <label>Category</label>
+                <select id="categoryFilter" onchange="renderTable()">
+                    <option value="All">All Categories</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <button class="print-btn" onclick="window.print()">Print Report</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="updateDateDisplay" class="update-stamp">SYNCHRONIZING DATA...</div>
+
+    <div class="table-responsive">
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Item Description</th>
+                    <th>Unit</th>
+                    <th>Unit Price</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+    
+    <div id="noResults" style="text-align:center; padding:60px; color:#999; display:none;">No matching materials found.</div>
+
+    <div class="footer-content">
+        <div class="disclaimer-box">
+            <span class="disclaimer-title">DISCLAIMER</span>
+            <p>Please refer to the updated pricelist provided. This document is for reference only and must not be edited.</p>
+        </div>
+
+        <div class="signature-block">
+            <span style="font-size: 13px;">Prepared by:</span><br>
+            <span style="font-style: italic; font-size: 11px; color: #777;">(Electronically Signed)</span><br>
+            <span class="signatory-name">MICHAEL J. BELICANO</span>
+            <span style="font-size: 12px; display: block; margin-top: 5px;">Engineering Assistant</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    let masterData = [];
+
+    // Automatically fetch the raw file when page opens
+    window.addEventListener('DOMContentLoaded', () => {
+        autoLoadCSV();
+    });
+
+    async function autoLoadCSV() {
+        try {
+            // "data.csv" must be in the same folder
+            const response = await fetch('data.csv');
+            if (!response.ok) throw new Error('File not found');
+            const text = await response.text();
+            parseCSVData(text);
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('updateDateDisplay').innerText = "ERROR: data.csv NOT FOUND IN FOLDER";
+        }
+    }
+
+    function parseCSVData(text) {
+        const lines = text.split('\n');
+        
+        // Handle the "Updated as of" header line from your CSV
+        if (lines[0].toLowerCase().includes("updated as of")) {
+            const cleanedDate = lines[0].replace(/,+/g, ' ').trim();
+            document.getElementById('updateDateDisplay').innerText = cleanedDate;
+        }
+
+        masterData = [];
+        let currentCategory = "";
+
+        for (let i = 1; i < lines.length; i++) {
+            if (!lines[i].trim() || lines[i].startsWith("Category")) continue; 
+            
+            // CSV Regex to handle potential commas inside quotes
+            const columns = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+            
+            let category = columns[0] ? columns[0].trim().replace(/"/g, '') : "";
+            let type = columns[1] ? columns[1].trim().replace(/"/g, '') : "";
+            let item = columns[2] ? columns[2].trim().replace(/"/g, '') : "";
+            let unit = columns[3] ? columns[3].trim().replace(/"/g, '') : "";
+            let price = columns[4] ? columns[4].trim().replace(/"/g, '') : "";
+
+            if (category !== "") currentCategory = category;
+
+            if (item !== "") {
+                masterData.push({
+                    category: currentCategory,
+                    type: type,
+                    item: item,
+                    unit: unit,
+                    price: price
+                });
+            }
+        }
+        updateCategoryDropdown();
+        renderTable();
+    }
+
+    function updateCategoryDropdown() {
+        const select = document.getElementById('categoryFilter');
+        const categories = [...new Set(masterData.map(d => d.category))].filter(c => c).sort();
+        select.innerHTML = '<option value="All">All Categories</option>';
+        categories.forEach(cat => {
+            let opt = document.createElement('option');
+            opt.value = cat;
+            opt.innerText = cat;
+            select.appendChild(opt);
+        });
+    }
+
+    function renderTable() {
+        const selectedCat = document.getElementById('categoryFilter').value;
+        const search = document.getElementById('searchFilter').value.toLowerCase();
+        const tbody = document.getElementById('tableBody');
+        const noResults = document.getElementById('noResults');
+        
+        tbody.innerHTML = "";
+        const filtered = masterData.filter(d => {
+            const matchesCat = (selectedCat === "All" || d.category === selectedCat);
+            const matchesSearch = (d.item.toLowerCase().includes(search) || d.type.toLowerCase().includes(search));
+            return matchesCat && matchesSearch;
+        });
+
+        filtered.forEach(row => {
+            let cleanPrice = row.price.trim().replace('₱', '');
+            let formattedPrice = '₱' + cleanPrice;
+
+            tbody.innerHTML += `
+                <tr>
+                    <td><span class="cat-tag">${row.category}</span></td>
+                    <td><span class="type-text">${row.type}</span></td>
+                    <td>${row.item}</td>
+                    <td style="font-style: italic; color: #666;">${row.unit}</td>
+                    <td class="price-cell">${formattedPrice}</td>
+                </tr>
+            `;
+        });
+
+        noResults.style.display = (filtered.length === 0 && masterData.length > 0) ? "block" : "none";
+    }
+</script>
+
+</body>
+</html>
