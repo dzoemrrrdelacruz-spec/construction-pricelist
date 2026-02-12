@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Construction Material Pricelist Guide</title>
     <style>
-        /* CSS remains identical to your original to preserve branding and layout */
         :root {
             --ceo-blue: #1a3a6d;
             --ceo-red: #b31919;
@@ -76,7 +75,7 @@
         .tools-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
         
         @media (min-width: 800px) {
-            .tools-grid { grid-template-columns: 1.5fr 1fr 0.6fr; } /* Adjusted for removed upload button */
+            .tools-grid { grid-template-columns: 1.5fr 1fr 0.6fr; }
             .header-logo { height: 100px; }
             .main-title { font-size: 34px; }
         }
@@ -85,7 +84,7 @@
         label { margin-bottom: 8px; font-size: 11px; font-weight: 800; color: var(--ceo-blue); text-transform: uppercase; }
         select, input { padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; outline: none; background: white; }
 
-        .print-btn { background-color: var(--ceo-blue); color: white; border: none; padding: 12px; border-radius: 4px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; margin-top: auto; }
+        .print-btn { background-color: var(--ceo-blue); color: white; border: none; padding: 12px; border-radius: 4px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; }
 
         .update-stamp { text-align: right; padding: 10px 20px; font-size: 12px; color: var(--ceo-red); font-weight: 900; text-transform: uppercase; background: #fff; border-bottom: 1px solid #f0f0f0; }
 
@@ -133,7 +132,7 @@
         <div class="tools-grid">
             <div class="control-group">
                 <label>Search Material</label>
-                <input type="text" id="searchFilter" placeholder="Search description or type..." onkeyup="renderTable()">
+                <input type="text" id="searchFilter" placeholder="Search..." onkeyup="renderTable()">
             </div>
             <div class="control-group">
                 <label>Category</label>
@@ -142,6 +141,7 @@
                 </select>
             </div>
             <div class="control-group">
+                <label>&nbsp;</label>
                 <button class="print-btn" onclick="window.print()">Print Report</button>
             </div>
         </div>
@@ -184,28 +184,26 @@
 <script>
     let masterData = [];
 
-    // Automatically fetch the raw file when page opens
     window.addEventListener('DOMContentLoaded', () => {
         autoLoadCSV();
     });
 
     async function autoLoadCSV() {
         try {
-            // "data.csv" must be in the same folder
+            // Updated to fetch 'data.csv' as requested
             const response = await fetch('data.csv');
             if (!response.ok) throw new Error('File not found');
             const text = await response.text();
             parseCSVData(text);
         } catch (error) {
             console.error('Error:', error);
-            document.getElementById('updateDateDisplay').innerText = "ERROR: data.csv NOT FOUND IN FOLDER";
+            document.getElementById('updateDateDisplay').innerText = "ERROR: data.csv NOT FOUND";
         }
     }
 
     function parseCSVData(text) {
         const lines = text.split('\n');
         
-        // Handle the "Updated as of" header line from your CSV
         if (lines[0].toLowerCase().includes("updated as of")) {
             const cleanedDate = lines[0].replace(/,+/g, ' ').trim();
             document.getElementById('updateDateDisplay').innerText = cleanedDate;
@@ -217,7 +215,6 @@
         for (let i = 1; i < lines.length; i++) {
             if (!lines[i].trim() || lines[i].startsWith("Category")) continue; 
             
-            // CSV Regex to handle potential commas inside quotes
             const columns = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
             
             let category = columns[0] ? columns[0].trim().replace(/"/g, '') : "";
